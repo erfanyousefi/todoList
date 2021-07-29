@@ -4,6 +4,7 @@ const http = require("http");
 const path = require("path");
 const expressEjsLayouts = require("express-ejs-layouts")
 const Router = require("./routes/index")
+const mongoose = require("mongoose")
 require("dotenv").config();
 module.exports = class Application {
     constructor() {
@@ -31,7 +32,14 @@ module.exports = class Application {
 
     }
     databaseConnection() {
-
+        mongoose.connect(`${process.env.STR_CONN_DB}`,{
+            useCreateIndex : true,
+            useFindAndModify : false,
+            useNewUrlParser : true,
+            useUnifiedTopology : true
+        }, (err) => {
+            if(!err) console.log("connect to database successfly.");
+        })
     }
     createRouting() {
         app.use(Router)

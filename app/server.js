@@ -21,10 +21,13 @@ module.exports = class Application {
     configApplication() {
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
-        app.use(express.static(path.join(__dirname, "public")))
-        app.set("view engine", "ejs")
+        app.use(express.static("public"))
+        app.set("view engine", "ejs");
         app.use(expressEjsLayouts);
-        app.set("views", "resource/views");
+        app.set("layout", "partials/master-layout");
+        app.set("views", path.resolve("resource/views"));
+        app.set("layout extractStyles", true);
+        app.set("layout extractScripts", true);
 
     }
     databaseConnection() {

@@ -1,0 +1,24 @@
+<h1>create Todo</h1>
+<form action="/todo/insert" method="post" class="p-2">
+    <input type="text" name="title" class="form-control m-2" placeholder="title of Todo" autocomplete="off">
+    <textarea name="text" rows="5" class="form-control m-2" placeholder="content of Todo" autocomplete="off"></textarea>
+    <button class="btn btn-info m-2 text-white">Save Todo</button>
+</form>
+<%if(messages.success){%>
+    <script>
+        Swal.fire({
+            icon : "success",
+            title : "Messages ",
+            text : '<%=messages.success%>'
+        })
+    </script>
+<%}else if(messages.error){%>
+    <script>
+        Swal.fire({
+            icon : "warning",
+            title : "Messages ",
+            text : '<%=messages.error%>'
+        })
+    </script>
+
+<%}%>

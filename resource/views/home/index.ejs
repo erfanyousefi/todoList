@@ -1,1 +1,67 @@
 <h1>index Page</h1>
+<hr>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title of Todo</th>
+            <th>Content of Todo</th>
+            <th>Setting(s)</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Title of Todo</th>
+            <th>Content of Todo</th>
+            <th>Setting(s)</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <%todos.forEach((todo, index)=> {%>
+            <tr>
+                <td>
+                    <%=index++%>
+                </td>
+                <td>
+                    <%=todo.title%>
+                </td>
+                <td>
+                    <%=todo.text%>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-danger mx-1 btnDelete">delete</a>
+                    <a href="#" class="btn btn-primary mx-1">show</a>
+                    <a href="#" class="btn btn-success mx-1">Edit</a>
+                </td>
+            </tr>
+            <%})%>
+    </tbody>
+
+</table>
+<style>
+    table thead tr th:nth-child(4),
+    table tfoot tr th:nth-child(4) {
+        text-align: center;
+    }
+</style>
+<script>
+    let btnDeletes = document.querySelectorAll(".btnDelete");
+    btnDeletes.forEach(btnDelete => {
+        btnDelete.addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                icon: "question",
+                text: "Are You want Delete Todo?!",
+                showCancelButton: true,
+            }).then(response => {
+                if (response.isConfirmed) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "Deleted Todo",
+                    })
+                }
+            })
+        })
+    })
+</script>
